@@ -8,7 +8,7 @@ public class Shoot : MonoBehaviour
     
     public Camera laserCamera;
 
-    public float laserDamage = 10f;
+    public float laserDamage = 20f;
     public float laserRange = 100f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
