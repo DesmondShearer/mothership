@@ -5,11 +5,11 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     public AudioSource laserSound;
-    public Transform firePoint;
-    public GameObject laser;
-    public GameObject hitPoint;
-    public Camera laserCamera;
     
+    public Camera laserCamera;
+
+    public float laserDamage = 10f;
+    public float laserRange = 100f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,17 +28,15 @@ public class Shoot : MonoBehaviour
 
     public void Shooting()
     {
-        RaycastHit hit;
         laserSound.Play();
-        if(Physics.Raycast(firePoint.position, transform.TransformDirection(Vector3.forward), out hit, 100))
+        RaycastHit hit;
+        if(Physics.Raycast(laserCamera.transform.position, laserCamera.transform.forward, out hit, laserRange))
         {
-            Debug.DrawRay(firePoint.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
-            
-            GameObject a = Instantiate(laser, firePoint.position, Quaternion.identity);
-            GameObject b = Instantiate(hitPoint, hit.point, Quaternion.identity);
-            
-            Destroy(a,1);
-            Destroy(b,1);
+           Target target = hit.transform.GetComponent<Target>();
+           if (target !=null)
+           {
+               target.TakeDamage(laserDamage);
+           }
         }
     }
 
