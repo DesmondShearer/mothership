@@ -18,12 +18,16 @@ public class Shoot : MonoBehaviour
     public float fireRate = 0.25f;
     public bool canFire = true;
     
+    public GameManager gameManager;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
        laserLine = GetComponentInChildren<LineRenderer>();
        laserSound = GetComponentInChildren<AudioSource>();
        playerCamera = GetComponentInChildren<Camera>();
+       
+       gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -58,6 +62,8 @@ public class Shoot : MonoBehaviour
         {
             laserLine.SetPosition(1, hit.point);
             Target health = hit.collider.GetComponent<Target>();
+            Target points = hit.collider.GetComponent<Target>();
+            gameManager.UpdateScore(points.points);
             if (health != null)
             {
                 health.TakeDamage(laserDamage);
