@@ -19,6 +19,7 @@ public class Shoot : MonoBehaviour
     public bool canFire = true;
     
     public GameManager gameManager;
+    public ParticleSystem hitParticles;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,6 +29,7 @@ public class Shoot : MonoBehaviour
        playerCamera = GetComponentInChildren<Camera>();
        
        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+       //hitParticles = GameObject.Find("Sparks").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -63,10 +65,12 @@ public class Shoot : MonoBehaviour
             laserLine.SetPosition(1, hit.point);
             Target health = hit.collider.GetComponent<Target>();
             Target points = hit.collider.GetComponent<Target>();
-            gameManager.UpdateScore(points.points);
+            
             if (health != null)
             {
+                gameManager.UpdateScore(points.points);
                 health.TakeDamage(laserDamage);
+                Instantiate(hitParticles,hit.point,Quaternion.identity);
             }
                 
         }

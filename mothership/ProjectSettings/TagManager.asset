@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DockingArea
   - Asteroid
+  - Mothership
   layers:
   - Default
   - TransparentFX

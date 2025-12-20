@@ -9,13 +9,19 @@ public class GameManager : MonoBehaviour
     public List<GameObject> targets;
     private int asteroidCount = 50;
 
-    public int score;
+    private int score = 0;
+    private int health = 100;
+    private float fuel = 100;
+    
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI fuelText;
+    
    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        score = 0;
+        
         int index = Random.Range(0, targets.Count);
         for (int i = 1; i <= asteroidCount; i++)
         {
@@ -28,12 +34,27 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+        fuel -= Time.deltaTime;
+        fuelText.text = "Fuel: " + fuel;
+        Debug.Log(fuel);
+        
+        if (health == 0)
+        {
+            Debug.Log("Game Over");
+        }
     }
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
         Debug.Log(score);
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Credits: " + score;
         
+    }
+    
+    public void RemoveHealth(int damageToTake)
+    {
+        health -= damageToTake;
+        Debug.Log(health);
+        healthText.text = "Health: " + health;
     }
 }

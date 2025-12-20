@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     public bool isDocked;
     public bool isDocking = false;
 
+    public AudioSource damageAudio;
+    
+    public GameManager gameManager;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -39,12 +43,31 @@ public class PlayerController : MonoBehaviour
                                                                                                           
             mouseInputX = Input.GetAxis("Mouse X");
             mouseInputY = Input.GetAxis("Mouse Y");
+            
+            //hide menu
+            //start fuel count down
+            // enable lasers
+            
+            // enable boost
         }
         
         if (isDocking && Input.GetKey(KeyCode.Space))
         {
             isDocked = true;
             isDocking = false;
+        }
+
+        if (isDocked)
+        {
+            // show menu / controls
+            // disable lasers
+            // disable boost
+            // reset player position
+            // play docking sound
+            // played refuel sound
+            // repair health
+            // refuel
+            
         }
         
     }
@@ -75,6 +98,14 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            damageAudio.Play();
+            gameManager.RemoveHealth(10);
+            // particle effect
+        }
+    }
 }
