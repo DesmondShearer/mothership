@@ -20,6 +20,7 @@ public class Shoot : MonoBehaviour
     
     public GameManager gameManager;
     public ParticleSystem hitParticles;
+    public PlayerController playerController;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,12 +36,30 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (playerController.isDocked)
+        {
+           
+        }
+
+        if (!gameManager.gameOverCheck)
+        {
+            if (!playerController.isDocked)
+            {
+                if (Input.GetMouseButtonDown(0) && canFire)
+                {
+                    StartCoroutine(ShootLaser());
+                }
+            }
+        }
+
+        
+        
         Debug.DrawRay(laserOrigin.position, laserOrigin.transform.forward*laserRange, Color.red);
         
-        if (Input.GetMouseButtonDown(0) && canFire)
-        {
-            StartCoroutine(ShootLaser());
-        }
+        
+        
+      
     }
 
     private IEnumerator ShootLaser()

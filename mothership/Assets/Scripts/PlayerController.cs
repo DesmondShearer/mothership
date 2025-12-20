@@ -22,56 +22,22 @@ public class PlayerController : MonoBehaviour
     public AudioSource damageAudio;
     
     public GameManager gameManager;
+    
+    public Vector3 originalPosition;
+    
+    public AudioSource repairAudio;
+    public AudioSource dockingAudio;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerRb = GetComponent<Rigidbody>();
+        originalPosition = gameObject.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isDocked)
-        {
-            isDocked = false;
-        }
-        
-        if (!isDocked)
-        {
-            verticalMove = Input.GetAxis("Vertical");
-            horizontalMove = Input.GetAxis("Horizontal");
-            rollInput = Input.GetAxis("Roll");
-                                                                                                          
-            mouseInputX = Input.GetAxis("Mouse X");
-            mouseInputY = Input.GetAxis("Mouse Y");
-            
-            //hide menu
-            //start fuel count down
-            // enable lasers
-            
-            // enable boost
-        }
-        
-        if (isDocking && Input.GetKeyDown(KeyCode.Space))
-        {
-            isDocked = true;
-            isDocking = false;
-        }
-
-        if (isDocked)
-        {
-            // show menu / controls
-            // disable lasers
-            // disable boost
-            // reset player position
-            // play docking sound
-            // played refuel sound
-            // repair health
-            // refuel
-            
-        }
-
         
         
     }
@@ -94,6 +60,51 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.AddForce(playerRb.transform.TransformDirection(Vector3.forward) * verticalMove * moveSpeed * boostSpeed);
         }
+        
+        if (Input.GetKeyDown(KeyCode.Space) && isDocked)
+        {
+            isDocked = false;
+        }
+        
+        if (!isDocked)
+        {
+            verticalMove = Input.GetAxis("Vertical");
+            horizontalMove = Input.GetAxis("Horizontal");
+            rollInput = Input.GetAxis("Roll");
+                                                                                                          
+            mouseInputX = Input.GetAxis("Mouse X");
+            mouseInputY = Input.GetAxis("Mouse Y");
+            
+            
+            
+            //hide menu
+            //start fuel count down
+            // enable lasers
+            
+            // enable boost
+        }
+        
+        if (isDocking && Input.GetKey(KeyCode.Space))
+        {
+            isDocked = true;
+            isDocking = false;
+        }
+
+        if (isDocked)
+        {
+            
+            playerRb.transform.position = originalPosition;
+            
+            // show menu / controls
+            // disable lasers
+            // disable boost
+            // reset player position
+            // play docking sound
+            // played refuel sound
+            // repair health
+            // refuel
+            
+        }
 
     }
 
@@ -104,6 +115,8 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 isDocking = true;
+                repairAudio.Play();
+                dockingAudio.Play();
             }
         }
     }
