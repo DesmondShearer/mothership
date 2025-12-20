@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;
-    private int asteroidCount = 50;
+    private int asteroidCount = 30;
+    private float spawnRadius = 50;
 
     private int score = 0;
     private int health = 100;

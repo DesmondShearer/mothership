@@ -17,7 +17,7 @@ public class RandomPosition : MonoBehaviour
     void Start()
     {
         asteroidRb = GetComponent<Rigidbody>();
-        transform.position = RandomSpawnPosition();
+        asteroidRb.transform.position = RandomSpawnPosition();
 
         
     }

@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float mouseInputY;
     private float rollInput;
 
+    private float boostSpeed = 100.0f;
+
     public bool isDocked;
     public bool isDocking = false;
 
@@ -30,7 +32,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && isDocked)
+        if (Input.GetKeyDown(KeyCode.Space) && isDocked)
         {
             isDocked = false;
         }
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
             // enable boost
         }
         
-        if (isDocking && Input.GetKey(KeyCode.Space))
+        if (isDocking && Input.GetKeyDown(KeyCode.Space))
         {
             isDocked = true;
             isDocking = false;
@@ -69,6 +71,8 @@ public class PlayerController : MonoBehaviour
             // refuel
             
         }
+
+        
         
     }
 
@@ -85,6 +89,11 @@ public class PlayerController : MonoBehaviour
         playerRb.AddTorque(playerRb.transform.up * moveSpeedAngle * mouseInputX, ForceMode.VelocityChange);
 
         playerRb.AddTorque(playerRb.transform.forward * moveSpeedRollAngle * rollInput, ForceMode.VelocityChange);
+        
+        if (Input.GetKey(KeyCode.F) && !isDocked)
+        {
+            playerRb.AddForce(playerRb.transform.TransformDirection(Vector3.forward) * verticalMove * moveSpeed * boostSpeed);
+        }
 
     }
 
