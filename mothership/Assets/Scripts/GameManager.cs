@@ -9,12 +9,15 @@ public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;
     private int asteroidCount = 30;
-    private float spawnRadius = 50;
 
-    private int score = 0;
-    private int health = 50;
-    private float fuel = 100;
-    
+    private int score;
+    private int health;
+    private float fuel;
+    private int initialScore = 0;
+    private int initialHealth = 50;
+    private float initialFuel = 100;
+
+
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI fuelText;
@@ -56,21 +59,21 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (playerController.isDocked)
-        {
-            menu.gameObject.SetActive(true);
+        if (playerController.isDocked)                          // if player is docked, menu/title text/instructions appear
+        {                                                       //fuel & health is set to initial 
+            menu.gameObject.SetActive(true);                                      
             titleText.gameObject.SetActive(true);
             instructionsText.gameObject.SetActive(true);
-            fuel = 100;
+            fuel = initialFuel;
             fuelText.text = "Fuel: " + fuel;
             
-            health = 50;
+            health = initialHealth;
             healthText.text = "Health: " + health;
             
             
         }
 
-        if (!playerController.isDocked)
+        if (!playerController.isDocked)                         // if player is not docked, menu/title/instruction do not appear, fuel reduces with time
         {
            menu.gameObject.SetActive(false);
            titleText.gameObject.SetActive(false);
@@ -83,44 +86,24 @@ public class GameManager : MonoBehaviour
 
         
         
-        if (health == 0) 
+        if (health == 0)                                         // if player health is 0, game is over, game over due to damage text displays,
+                                                                 // final score displays
         {
-            gameOverCheck = true;
-            gameOver.gameObject.SetActive(true);
+            GameOver();          
             gameOverReasonText.text = "You took too much damage!";
-            gameOverText.gameObject.SetActive(true);
-            gameOverReasonText.gameObject.SetActive(true);
-            gameOverScoreText.text = "You earned " + score + " Credits!";
-            gameOverScoreText.gameObject.SetActive(true);
-            
-            
-            if (!alreadyPlayed)
-            {
-                dieAudio.Play();
-                alreadyPlayed = true;
-            }
-            Debug.Log("Game Over");
+           
         }
         
-        if (fuel <= 0)
+        if (fuel <= 0)                                           // if fuel is 0, game is over, game over due to empty tank displays,
+                                                                 // final score displays
         {
-            gameOverCheck = true;
-            gameOver.gameObject.SetActive(true);
+            GameOver();        
             gameOverReasonText.text = "The fuel tank is empty!";
-            gameOverText.gameObject.SetActive(true);
-            gameOverReasonText.gameObject.SetActive(true);
-            gameOverScoreText.text = "You earned " + score + " Credits!";
-            gameOverScoreText.gameObject.SetActive(true);
-            if (!alreadyPlayed)
-            {
-                dieAudio.Play();
-                alreadyPlayed = true;
-            }
-            Debug.Log("Game Over");
+            
         }
         
     }
-    public void UpdateScore(int scoreToAdd)
+    public void UpdateScore(int scoreToAdd)                     // score display updates with points gained
     {
         score += scoreToAdd;
         Debug.Log(score);
@@ -128,10 +111,31 @@ public class GameManager : MonoBehaviour
         
     }
     
-    public void RemoveHealth(int damageToTake)
+    public void RemoveHealth(int damageToTake)                  // health display updates with damage taken
     {
         health -= damageToTake;
         Debug.Log(health);
         healthText.text = "Health: " + health;
     }
+
+    void GameOver()
+    {
+        gameOverCheck = true;
+        gameOver.gameObject.SetActive(true);
+        gameOverText.gameObject.SetActive(true);
+        gameOverReasonText.gameObject.SetActive(true);
+        gameOverScoreText.text = "You earned " + score + " Credits!";
+        gameOverScoreText.gameObject.SetActive(true);
+
+
+        if (!alreadyPlayed)                                  // if not already played, audio plays
+        {
+            dieAudio.Play();
+            alreadyPlayed = true;
+        }
+        Debug.Log("Game Over");
+
+    }
+
+ 
 }
