@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     private int score;
     private int health;
     private float fuel;
-    private int initialScore = 0;
     private int initialHealth = 50;
     private float initialFuel = 100;
 
