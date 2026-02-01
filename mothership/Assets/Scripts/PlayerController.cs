@@ -30,17 +30,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;           // mouse pointer locked to centre 
         playerRb = GetComponent<Rigidbody>();
-        originalPosition = gameObject.transform.position;
+        originalPosition = gameObject.transform.position;   // player object is in start position
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-    }
 
     private void FixedUpdate()
     {
@@ -56,17 +50,17 @@ public class PlayerController : MonoBehaviour
 
         playerRb.AddTorque(playerRb.transform.forward * moveSpeedRollAngle * rollInput, ForceMode.VelocityChange);
         
-        if (Input.GetKey(KeyCode.F) && !isDocked)
+        if (Input.GetKey(KeyCode.F) && !isDocked)                       // if player is not docked & F is pressed, boost speed is added to player speed
         {
             playerRb.AddForce(playerRb.transform.TransformDirection(Vector3.forward) * verticalMove * moveSpeed * boostSpeed);
         }
         
-        if (Input.GetKeyDown(KeyCode.Space) && isDocked)
+        if (Input.GetKeyDown(KeyCode.Space) && isDocked)                // if player is docked and space is pressed, player is no longer docked
         {
             isDocked = false;
         }
         
-        if (!isDocked)
+        if (!isDocked)                                                  // if player is not docked, movement can take place
         {
             verticalMove = Input.GetAxis("Vertical");
             horizontalMove = Input.GetAxis("Horizontal");
@@ -74,17 +68,10 @@ public class PlayerController : MonoBehaviour
                                                                                                           
             mouseInputX = Input.GetAxis("Mouse X");
             mouseInputY = Input.GetAxis("Mouse Y");
-            
-            
-            
-            //hide menu
-            //start fuel count down
-            // enable lasers
-            
-            // enable boost
+
         }
         
-        if (isDocking && Input.GetKey(KeyCode.Space))
+        if (isDocking && Input.GetKey(KeyCode.Space))                   // if player is docking and space is pressed, player is docked
         {
             isDocked = true;
             isDocking = false;
@@ -93,28 +80,19 @@ public class PlayerController : MonoBehaviour
         if (isDocked)
         {
             
-            playerRb.transform.position = originalPosition;
-            
-            // show menu / controls
-            // disable lasers
-            // disable boost
-            // reset player position
-            // play docking sound
-            // played refuel sound
-            // repair health
-            // refuel
-            
+            playerRb.transform.position = originalPosition;             // if docked, player returns to initial position
+ 
         }
 
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("DockingArea") && !isDocked)
+        if (other.CompareTag("DockingArea") && !isDocked)               // if player is in docking area and is not docked
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                isDocking = true;
+            if (Input.GetKey(KeyCode.Space))                            // if space is pressed
+            {       
+                isDocking = true;                                       // player is docking, audio plays
                 repairAudio.Play();
                 dockingAudio.Play();
             }
@@ -123,11 +101,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Asteroid"))
+        if (collision.gameObject.CompareTag("Asteroid"))                // if player collides with asteroid, audio plays, player health is reduced
         {
             damageAudio.Play();
             gameManager.RemoveHealth(10);
-            // particle effect
+
         }
     }
 }

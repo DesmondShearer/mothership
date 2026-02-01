@@ -37,33 +37,33 @@ public class Shoot : MonoBehaviour
     void Update()
     {
 
-        if (!gameManager.gameOverCheck)
+        if (!gameManager.gameOverCheck)                         // if game is NOT over
         {
-            if (!playerController.isDocked)
+            if (!playerController.isDocked)                     // if player is NOT docked
             {
-                if (Input.GetMouseButtonDown(0) && canFire)
+                if (Input.GetMouseButtonDown(0) && canFire)     // if left mouse button is pressed and firing is allowed
                 {
-                    StartCoroutine(ShootLaser());
+                    StartCoroutine(ShootLaser());               // shoot laser
                 }
             }
         }
 
               
-        Debug.DrawRay(laserOrigin.position, laserOrigin.transform.forward*laserRange, Color.red);
+        Debug.DrawRay(laserOrigin.position, laserOrigin.transform.forward*laserRange, Color.red);   
               
       
     }
 
     private IEnumerator ShootLaser()
     {
-        canFire = false;
-        Fire();
-        laserSound.Play();
-        laserLine.enabled = true;
-        yield return new WaitForSeconds(fireRate);
-        laserLine.enabled = false;
-        canFire = true;
-    }
+        canFire = false;                                // if laser is being fired, it cannot fire again
+        Fire();                                         // run laser fire method
+        laserSound.Play();                              // play sound
+        laserLine.enabled = true;                       // enable visual line
+        yield return new WaitForSeconds(fireRate);      //fire for determined time
+        laserLine.enabled = false;                      // switch off visual line    
+        canFire = true;                                 // allow firing again
+    }   
 
     void Fire()
     {
@@ -71,23 +71,24 @@ public class Shoot : MonoBehaviour
         RaycastHit hit;
         laserLine.SetPosition(0, laserOrigin.position);
  
-        if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, laserRange))
+        if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, laserRange))    // if laser hits asteroid
         {
             laserLine.SetPosition(1, hit.point);
-            Target health = hit.collider.GetComponent<Target>();
-            Target points = hit.collider.GetComponent<Target>();
+            Target health = hit.collider.GetComponent<Target>();                                // get health of target
+            Target points = hit.collider.GetComponent<Target>();                                // get point value of target
             
-            if (health != null)
+            if (health != null)                                                                 // if target health is not null
             {
-                gameManager.UpdateScore(points.points);
-                health.TakeDamage(laserDamage);
-                Instantiate(hitParticles,hit.point,Quaternion.identity);
+                gameManager.UpdateScore(points.points);                                         // increase points
+                health.TakeDamage(laserDamage);                                                 // remove health from target by laser damage amount (using take damage method on target)
+                Instantiate(hitParticles,hit.point,Quaternion.identity);                        // generate particles to show hit
             }
                 
         }
         else
         {
-            laserLine.SetPosition(1,rayOrigin + (playerCamera.transform.forward * laserRange));
+            laserLine.SetPosition(1,rayOrigin + (playerCamera.transform.forward * laserRange));   // otherwise, just fire the laser from the origin
+                                                                                                    // as far as the range is set
         }
     }
 }

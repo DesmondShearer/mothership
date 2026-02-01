@@ -5,16 +5,12 @@ public class RestartGame : MonoBehaviour
 {
     public GameManager gameManager;
     public PlayerController playerController;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.gameOverCheck)
+        if (gameManager.gameOverCheck)                  // if game is over and escape is pressed, scene is restarted
             
         {
             if (Input.GetKey(KeyCode.Escape))
@@ -24,7 +20,7 @@ public class RestartGame : MonoBehaviour
         }
     }
 
-    public void RestartScene()
+    public void RestartScene()                          // reloads scene
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
