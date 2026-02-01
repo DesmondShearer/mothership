@@ -30,17 +30,12 @@ public class Shoot : MonoBehaviour
        playerCamera = GetComponentInChildren<Camera>();
        
        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-       //hitParticles = GameObject.Find("Sparks").GetComponent<ParticleSystem>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (playerController.isDocked)
-        {
-           
-        }
 
         if (!gameManager.gameOverCheck)
         {
@@ -53,12 +48,9 @@ public class Shoot : MonoBehaviour
             }
         }
 
-        
-        
+              
         Debug.DrawRay(laserOrigin.position, laserOrigin.transform.forward*laserRange, Color.red);
-        
-        
-        
+              
       
     }
 
