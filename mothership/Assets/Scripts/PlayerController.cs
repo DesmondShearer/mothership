@@ -108,6 +108,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // on tigger ENTER vs EXIT - adjust bools
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("DockingArea") && !isDocked)
@@ -121,6 +123,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // move to asteroid
+    // player health script
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Asteroid"))

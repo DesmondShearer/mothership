@@ -7,6 +7,14 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    // TO DO
+    // create spawn manager
+    // remove spawner from gamemanger
+    
+    // spawn manager
+    // containers random size/ scale /position instead of seperate scripts.
+    
+    
     public List<GameObject> targets;
     private int asteroidCount = 30;
     private float spawnRadius = 50;
@@ -40,6 +48,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameOverCheck = false;
+        //stop spawning asteroids here
+        
         int index = Random.Range(0, targets.Count);
         for (int i = 1; i <= asteroidCount; i++)
         {
@@ -82,7 +92,7 @@ public class GameManager : MonoBehaviour
         }
 
         
-        
+        // refactor this. !!
         if (health == 0) 
         {
             gameOverCheck = true;
@@ -120,6 +130,8 @@ public class GameManager : MonoBehaviour
         }
         
     }
+    
+    //score manager
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
@@ -127,7 +139,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Credits: " + score;
         
     }
-    
+    //for player health script
     public void RemoveHealth(int damageToTake)
     {
         health -= damageToTake;
