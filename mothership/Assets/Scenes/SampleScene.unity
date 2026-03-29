@@ -1114,13 +1114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c37c9244b1f31e4892cbdb35ab5ab62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 7564544241487233106, guid: 7ae775a23f40128468640049e6e1c14c, type: 3}
-  - {fileID: 5211979441293890840, guid: 1027407399ee13c48954a28706f33f3a, type: 3}
-  scoreText: {fileID: 1785724661}
   healthText: {fileID: 1830497278}
   fuelText: {fileID: 128197091}
   playerController: {fileID: 439607500}
+  creditManager: {fileID: 1846242387}
   menu: {fileID: 430221641}
   titleText: {fileID: 333534178}
   instructionsText: {fileID: 898468043}
@@ -1712,6 +1709,7 @@ MonoBehaviour:
   fireRate: 0.2
   canFire: 1
   gameManager: {fileID: 341727746}
+  creditManager: {fileID: 0}
   hitParticles: {fileID: 808725724}
   playerController: {fileID: 439607500}
 --- !u!1 &471056456
@@ -3263,6 +3261,101 @@ RectTransform:
   m_AnchoredPosition: {x: -100, y: 75.001}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1846242386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1846242388}
+  - component: {fileID: 1846242387}
+  m_Layer: 0
+  m_Name: CreditManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1846242387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846242386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8eb1c801755ff41a9818d06f59679a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1785724661}
+  totalCredits: 0
+--- !u!4 &1846242388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846242386}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -100.69421, y: 0, z: 3034.6042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1899724179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1899724181}
+  - component: {fileID: 1899724180}
+  m_Layer: 0
+  m_Name: AsteroidSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1899724180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899724179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5bc50bfecc0ed54a8e7e4e98ca49fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroidObjects:
+  - {fileID: 7564544241487233106, guid: 7ae775a23f40128468640049e6e1c14c, type: 3}
+  amountOfAsteroids: 50
+  minRandomSpawn: -500
+  maxRandomSpawn: 500
+--- !u!4 &1899724181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899724179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1919581692
 GameObject:
   m_ObjectHideFlags: 0
@@ -3858,6 +3951,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6139624953952310265, guid: 7ae775a23f40128468640049e6e1c14c, type: 3}
+      propertyPath: _targetType
+      value: 
+      objectReference: {fileID: 11400000, guid: b3bec7111584a614fa63a55b1f9546fc, type: 2}
     - target: {fileID: 6372835213384312403, guid: 7ae775a23f40128468640049e6e1c14c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -4076,3 +4173,5 @@ SceneRoots:
   - {fileID: 2069275562}
   - {fileID: 341727745}
   - {fileID: 96038052}
+  - {fileID: 1899724181}
+  - {fileID: 1846242388}

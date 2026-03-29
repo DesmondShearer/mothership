@@ -19,6 +19,7 @@ public class Shoot : MonoBehaviour
     public bool canFire = true;
     
     public GameManager gameManager;
+    public CreditManager creditManager;
     public ParticleSystem hitParticles;
     public PlayerController playerController;
     
@@ -30,6 +31,7 @@ public class Shoot : MonoBehaviour
        playerCamera = GetComponentInChildren<Camera>();
        
        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+       creditManager = GameObject.Find("CreditManager").GetComponent<CreditManager>();
        //hitParticles = GameObject.Find("Sparks").GetComponent<ParticleSystem>();
     }
 
@@ -82,13 +84,13 @@ public class Shoot : MonoBehaviour
         if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, laserRange))
         {
             laserLine.SetPosition(1, hit.point);
-            Target health = hit.collider.GetComponent<Target>();
-            Target points = hit.collider.GetComponent<Target>();
+            Target target = hit.collider.GetComponent<Target>();
             
-            if (health != null)
-            {
-                gameManager.UpdateScore(points.points);
-                health.TakeDamage(laserDamage);
+            
+            if (target != null){
+                
+                creditManager.UpdateCredits(target.configuration.creditValue);
+                target.TakeDamage(laserDamage);
                 Instantiate(hitParticles,hit.point,Quaternion.identity);
             }
                 

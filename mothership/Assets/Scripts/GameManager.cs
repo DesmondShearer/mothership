@@ -15,19 +15,21 @@ public class GameManager : MonoBehaviour
     // containers random size/ scale /position instead of seperate scripts.
     
     
-    public List<GameObject> targets;
-    private int asteroidCount = 30;
-    private float spawnRadius = 50;
+    //public List<GameObject> targets;
+    //private int asteroidCount = 30;
+    //private float spawnRadius = 50;
 
-    private int score = 0;
+    //private float score = 0;
     private int health = 50;
     private float fuel = 100;
     
-    public TextMeshProUGUI scoreText;
+    //public TextMeshProUGUI scoreText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI fuelText;
     
     public PlayerController playerController;
+    
+    public CreditManager creditManager;
     
     public Image menu;
     public TextMeshProUGUI titleText;
@@ -47,14 +49,15 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameOverCheck = false;
         //stop spawning asteroids here
-        
-        int index = Random.Range(0, targets.Count);
-        for (int i = 1; i <= asteroidCount; i++)
-        {
-            Instantiate(targets[index]);
-        }
+                
+        //int index = Random.Range(0, targets.Count);
+        //for (int i = 1; i <= asteroidCount; i++)
+        //{
+        //    Instantiate(targets[index]);
+        //}
+                
+        gameOverCheck = false;
         gameOver.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(false);
         gameOverReasonText.gameObject.SetActive(false);
@@ -100,7 +103,7 @@ public class GameManager : MonoBehaviour
             gameOverReasonText.text = "You took too much damage!";
             gameOverText.gameObject.SetActive(true);
             gameOverReasonText.gameObject.SetActive(true);
-            gameOverScoreText.text = "You earned " + score + " Credits!";
+            gameOverScoreText.text = "You earned " + creditManager.totalCredits + " Credits!";
             gameOverScoreText.gameObject.SetActive(true);
             
             
@@ -119,7 +122,7 @@ public class GameManager : MonoBehaviour
             gameOverReasonText.text = "The fuel tank is empty!";
             gameOverText.gameObject.SetActive(true);
             gameOverReasonText.gameObject.SetActive(true);
-            gameOverScoreText.text = "You earned " + score + " Credits!";
+            gameOverScoreText.text = "You earned " + creditManager.totalCredits + " Credits!";
             gameOverScoreText.gameObject.SetActive(true);
             if (!alreadyPlayed)
             {
@@ -132,13 +135,13 @@ public class GameManager : MonoBehaviour
     }
     
     //score manager
-    public void UpdateScore(int scoreToAdd)
-    {
-        score += scoreToAdd;
-        Debug.Log(score);
-        scoreText.text = "Credits: " + score;
+  //  public void UpdateScore(float scoreToAdd)
+   // {
+   //     score += scoreToAdd;
+   //     Debug.Log(score);
+   //     scoreText.text = "Credits: " + score;
         
-    }
+   // }
     //for player health script
     public void RemoveHealth(int damageToTake)
     {

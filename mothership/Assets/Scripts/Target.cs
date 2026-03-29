@@ -2,27 +2,21 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public float health = 50f;
-    public int points = 100;
+    [SerializeField] public float health;
+    [SerializeField] public TargetType configuration;
 
     void Start()
     { 
+        health = configuration.maxHealth;
     }
 
     public void TakeDamage(float amount)
     {
+        
         health -= amount;
         if (health <= 0)
         {
-            
-            Die();
+            Destroy(this.gameObject);
         }
-    }
-
-    void Die()
-    {
-        
-        Destroy(gameObject);
-        
     }
 }
