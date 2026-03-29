@@ -23,7 +23,6 @@ public class Shoot : MonoBehaviour
     public ParticleSystem hitParticles;
     public PlayerController playerController;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
        laserLine = GetComponentInChildren<LineRenderer>();
@@ -34,8 +33,7 @@ public class Shoot : MonoBehaviour
        creditManager = GameObject.Find("CreditManager").GetComponent<CreditManager>();
        //hitParticles = GameObject.Find("Sparks").GetComponent<ParticleSystem>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
 
@@ -54,13 +52,8 @@ public class Shoot : MonoBehaviour
                 }
             }
         }
-
-        
         
         Debug.DrawRay(laserOrigin.position, laserOrigin.transform.forward*laserRange, Color.red);
-        
-        
-        
       
     }
 

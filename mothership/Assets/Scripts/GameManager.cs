@@ -7,23 +7,11 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    // TO DO
-    // create spawn manager
-    // remove spawner from gamemanger
-    
-    // spawn manager
-    // containers random size/ scale /position instead of seperate scripts.
-    
-    //public List<GameObject> targets;
-    //private int asteroidCount = 30;
-    //private float spawnRadius = 50;
-    
     private int initialPlayerHealth = 50;
     private int currentPlayerHealth;
     private float initialPlayerFuel = 100;
     private float currentPlayerFuel;
     
-    //public TextMeshProUGUI scoreText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI fuelText;
     
@@ -44,31 +32,18 @@ public class GameManager : MonoBehaviour
     
     public AudioSource dieAudio;
     public bool alreadyPlayed = false;
-
- 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
-        //stop spawning asteroids here
-                
-        //int index = Random.Range(0, targets.Count);
-        //for (int i = 1; i <= asteroidCount; i++)
-        //{
-        //    Instantiate(targets[index]);
-        //}
-                
         gameOverCheck = false;
         gameOver.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(false);
         gameOverReasonText.gameObject.SetActive(false);
         gameOverScoreText.gameObject.SetActive(false);
-
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-
         if (playerController.isDocked)
         {
             menu.gameObject.SetActive(true);
@@ -91,7 +66,6 @@ public class GameManager : MonoBehaviour
            
            currentPlayerFuel -= Time.deltaTime;
            fuelText.text = "Fuel: " + currentPlayerFuel;
-           //Debug.Log(fuel);
         }
         
         if (currentPlayerHealth == 0)
@@ -108,19 +82,9 @@ public class GameManager : MonoBehaviour
         
     }
     
-    //score manager
-  //  public void UpdateScore(float scoreToAdd)
-   // {
-   //     score += scoreToAdd;
-   //     Debug.Log(score);
-   //     scoreText.text = "Credits: " + score;
-        
-   // }
-    //for player health script
     public void RemoveHealth(int damageToTake)
     {
         currentPlayerHealth -= damageToTake;
-        //Debug.Log(health);
         healthText.text = "Health: " + currentPlayerHealth;
     }
 
@@ -132,8 +96,7 @@ public class GameManager : MonoBehaviour
         gameOverReasonText.gameObject.SetActive(true);
         gameOverScoreText.text = "You earned " + creditManager.totalCredits + " Credits!";
         gameOverScoreText.gameObject.SetActive(true);
-            
-            
+        
         if (!alreadyPlayed)
         {
             dieAudio.Play();

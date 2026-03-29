@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Reference
     private Rigidbody playerRb;
     private float moveSpeed = 0.2f;
     private float moveSpeedAngle = 0.5f;
@@ -34,11 +33,9 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         originalPosition = gameObject.transform.position;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        
         
     }
 
@@ -74,14 +71,6 @@ public class PlayerController : MonoBehaviour
                                                                                                           
             mouseInputX = Input.GetAxis("Mouse X");
             mouseInputY = Input.GetAxis("Mouse Y");
-            
-            
-            
-            //hide menu
-            //start fuel count down
-            // enable lasers
-            
-            // enable boost
         }
         
         if (isDocking && Input.GetKey(KeyCode.Space))
@@ -92,18 +81,7 @@ public class PlayerController : MonoBehaviour
 
         if (isDocked)
         {
-            
             playerRb.transform.position = originalPosition;
-            
-            // show menu / controls
-            // disable lasers
-            // disable boost
-            // reset player position
-            // play docking sound
-            // played refuel sound
-            // repair health
-            // refuel
-            
         }
 
     }
