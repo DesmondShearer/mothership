@@ -8,10 +8,10 @@ public class Asteroid : MonoBehaviour
 
     public float minScale = 10f;
     public float maxScale = 25f;
-    public float minInitialForce = 100f;
-    public float maxInitialForce = 150f;
-    public float minInitialTorque = 100f;
-    public float maxInitialTorque = 150f;
+    public float minInitialForce = 50f;
+    public float maxInitialForce = 80f;
+    public float minInitialTorque = 50f;
+    public float maxInitialTorque = 80f;
     
     private void Awake()
     {
