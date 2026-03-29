@@ -14,14 +14,14 @@ public class GameManager : MonoBehaviour
     // spawn manager
     // containers random size/ scale /position instead of seperate scripts.
     
-    
     //public List<GameObject> targets;
     //private int asteroidCount = 30;
     //private float spawnRadius = 50;
-
-    //private float score = 0;
-    private int health = 50;
-    private float fuel = 100;
+    
+    private int initialPlayerHealth = 50;
+    private int currentPlayerHealth;
+    private float initialPlayerFuel = 100;
+    private float currentPlayerFuel;
     
     //public TextMeshProUGUI scoreText;
     public TextMeshProUGUI healthText;
@@ -74,11 +74,11 @@ public class GameManager : MonoBehaviour
             menu.gameObject.SetActive(true);
             titleText.gameObject.SetActive(true);
             instructionsText.gameObject.SetActive(true);
-            fuel = 100;
-            fuelText.text = "Fuel: " + fuel;
+            currentPlayerFuel = initialPlayerFuel;
+            fuelText.text = "Fuel: " + currentPlayerFuel;
             
-            health = 50;
-            healthText.text = "Health: " + health;
+            currentPlayerHealth = initialPlayerHealth;
+            healthText.text = "Health: " + currentPlayerHealth;
             
             
         }
@@ -89,47 +89,21 @@ public class GameManager : MonoBehaviour
            titleText.gameObject.SetActive(false);
            instructionsText.gameObject.SetActive(false);
            
-           fuel -= Time.deltaTime;
-           fuelText.text = "Fuel: " + fuel;
-           Debug.Log(fuel);
+           currentPlayerFuel -= Time.deltaTime;
+           fuelText.text = "Fuel: " + currentPlayerFuel;
+           //Debug.Log(fuel);
         }
-
         
-        // refactor this. !!
-        if (health == 0) 
+        if (currentPlayerHealth == 0)
         {
-            gameOverCheck = true;
-            gameOver.gameObject.SetActive(true);
+            GameOver();
             gameOverReasonText.text = "You took too much damage!";
-            gameOverText.gameObject.SetActive(true);
-            gameOverReasonText.gameObject.SetActive(true);
-            gameOverScoreText.text = "You earned " + creditManager.totalCredits + " Credits!";
-            gameOverScoreText.gameObject.SetActive(true);
-            
-            
-            if (!alreadyPlayed)
-            {
-                dieAudio.Play();
-                alreadyPlayed = true;
-            }
-            Debug.Log("Game Over");
         }
         
-        if (fuel <= 0)
+        if (currentPlayerFuel <= 0)
         {
-            gameOverCheck = true;
-            gameOver.gameObject.SetActive(true);
+            GameOver();
             gameOverReasonText.text = "The fuel tank is empty!";
-            gameOverText.gameObject.SetActive(true);
-            gameOverReasonText.gameObject.SetActive(true);
-            gameOverScoreText.text = "You earned " + creditManager.totalCredits + " Credits!";
-            gameOverScoreText.gameObject.SetActive(true);
-            if (!alreadyPlayed)
-            {
-                dieAudio.Play();
-                alreadyPlayed = true;
-            }
-            Debug.Log("Game Over");
         }
         
     }
@@ -145,8 +119,25 @@ public class GameManager : MonoBehaviour
     //for player health script
     public void RemoveHealth(int damageToTake)
     {
-        health -= damageToTake;
-        Debug.Log(health);
-        healthText.text = "Health: " + health;
+        currentPlayerHealth -= damageToTake;
+        //Debug.Log(health);
+        healthText.text = "Health: " + currentPlayerHealth;
+    }
+
+    public void GameOver()
+    {
+        gameOverCheck = true;
+        gameOver.gameObject.SetActive(true);
+        gameOverText.gameObject.SetActive(true);
+        gameOverReasonText.gameObject.SetActive(true);
+        gameOverScoreText.text = "You earned " + creditManager.totalCredits + " Credits!";
+        gameOverScoreText.gameObject.SetActive(true);
+            
+            
+        if (!alreadyPlayed)
+        {
+            dieAudio.Play();
+            alreadyPlayed = true;
+        }
     }
 }

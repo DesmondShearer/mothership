@@ -15,10 +15,7 @@ GameObject:
   - component: {fileID: 40748801865052519}
   - component: {fileID: 7880101411283828202}
   - component: {fileID: 2562710655386543519}
-  - component: {fileID: 6085672681273679686}
   - component: {fileID: 6139624953952310265}
-  - component: {fileID: 4920036257959191353}
-  - component: {fileID: 2594083168359368285}
   - component: {fileID: -36663587766851580}
   m_Layer: 0
   m_Name: LowGradeAsteroid
@@ -4944,19 +4941,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &6085672681273679686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7564544241487233106}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf4b63eaf40d00147a7e1cbe945522a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.05
 --- !u!114 &6139624953952310265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4971,30 +4955,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   configuration: {fileID: 11400000, guid: c25e9c1f22e5614479f4b9cbd8984935, type: 2}
---- !u!114 &4920036257959191353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7564544241487233106}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca0a26f00747418408a932c3aa24f3ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2594083168359368285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7564544241487233106}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bff05108aef945429b3163a151f4f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-36663587766851580
 MonoBehaviour:
   m_ObjectHideFlags: 0
