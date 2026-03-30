@@ -11,15 +11,9 @@ public class CreditManager : MonoBehaviour
         totalCredits = 0;
     }
     
-    void Update()
-    {
-        
-    }
-    
     public void UpdateCredits(float creditsToAdd)
     {
         totalCredits += creditsToAdd;
-        Debug.Log(totalCredits);
         scoreText.text = "Credits: " + totalCredits;
     }
 }

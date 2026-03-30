@@ -18,8 +18,7 @@ public class PlayerStatManager : MonoBehaviour
     {
         InitializeStats();
     }
-
-    // Update is called once per frame
+    
     void InitializeStats()
     {
         foreach (var s in playerStats)
@@ -37,7 +36,6 @@ public class PlayerStatManager : MonoBehaviour
     {
         if (creditManager.totalCredits < playerStatUpgrade.upgradePrice)
         {
-            Debug.Log("Not enough currency!");
             return;
         }
 
@@ -47,8 +45,6 @@ public class PlayerStatManager : MonoBehaviour
         {
             stat.currentValue += playerStatUpgrade.increaseAmount;
             creditManager.UpdateCredits(-playerStatUpgrade.upgradePrice);
-
-            Debug.Log($"{playerStatUpgrade.targetStat.statName} upgraded!");
         }
     }
 }

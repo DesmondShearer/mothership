@@ -5,11 +5,7 @@ public class RestartGame : MonoBehaviour
 {
     public GameManager gameManager;
     public PlayerController playerController;
-    void Start()
-    {
-        
-    }
-    
+
     void Update()
     {
         if (gameManager.gameOverCheck)

@@ -37,11 +37,6 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         originalPosition = gameObject.transform.position;
     }
-    
-    void Update()
-    {
-        
-    }
 
     private void FixedUpdate()
     {
@@ -103,7 +98,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    //move this to asteroid class
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Asteroid"))

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6970415657847742a15af7af22351de, type: 3}
   m_Name: PlayerStatUpgradeMoveSpeed
   m_EditorClassIdentifier: 
-  targetStat: {fileID: 0}
-  increaseAmount: 0
-  upgradePrice: 0
+  targetStat: {fileID: 11400000, guid: 2050b818da613f748a78e228d7b47114, type: 2}
+  increaseAmount: 0.1
+  upgradePrice: 500

@@ -6,7 +6,6 @@ using UnityEngine.Rendering.Universal.Internal;
 
 public class Shoot : MonoBehaviour
 {
-    
     public Camera playerCamera;
     public Transform laserOrigin;
     public LineRenderer laserLine;
@@ -31,7 +30,6 @@ public class Shoot : MonoBehaviour
        
        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
        creditManager = GameObject.Find("CreditManager").GetComponent<CreditManager>();
-       //hitParticles = GameObject.Find("Sparks").GetComponent<ParticleSystem>();
     }
     
     void Update()
@@ -79,7 +77,6 @@ public class Shoot : MonoBehaviour
             laserLine.SetPosition(1, hit.point);
             Target target = hit.collider.GetComponent<Target>();
             
-            
             if (target != null){
                 
                 creditManager.UpdateCredits(target.targetType.creditValue);
@@ -88,7 +85,6 @@ public class Shoot : MonoBehaviour
                 target.transform.localScale -= scaleChange;
                 Instantiate(hitParticles,hit.point,Quaternion.identity);
             }
-                
         }
         else
         {

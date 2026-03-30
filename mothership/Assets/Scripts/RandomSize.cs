@@ -4,8 +4,6 @@ public class RandomSize : MonoBehaviour
 {
     private Rigidbody asteroidRb;
     
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         asteroidRb = GetComponent<Rigidbody>();
@@ -15,10 +13,5 @@ public class RandomSize : MonoBehaviour
         asteroidRb.transform.localScale = randomScale;
         asteroidRb.mass = randomRange;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
