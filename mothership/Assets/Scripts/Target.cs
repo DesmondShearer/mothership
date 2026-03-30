@@ -3,11 +3,11 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     [SerializeField] public float health;
-    [SerializeField] public TargetType configuration;
+    [SerializeField] public TargetType targetType;
 
     void Start()
     { 
-        health = configuration.maxHealth;
+        health = targetType.maxHealth;
     }
 
     public void TakeDamage(float amount)

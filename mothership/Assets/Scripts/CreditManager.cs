@@ -21,6 +21,5 @@ public class CreditManager : MonoBehaviour
         totalCredits += creditsToAdd;
         Debug.Log(totalCredits);
         scoreText.text = "Credits: " + totalCredits;
-        
     }
 }

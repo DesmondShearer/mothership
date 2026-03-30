@@ -82,8 +82,10 @@ public class Shoot : MonoBehaviour
             
             if (target != null){
                 
-                creditManager.UpdateCredits(target.configuration.creditValue);
+                creditManager.UpdateCredits(target.targetType.creditValue);
                 target.TakeDamage(laserDamage);
+                Vector3 scaleChange = new Vector3(0.9f, 0.9f, 0.9f);
+                target.transform.localScale -= scaleChange;
                 Instantiate(hitParticles,hit.point,Quaternion.identity);
             }
                 

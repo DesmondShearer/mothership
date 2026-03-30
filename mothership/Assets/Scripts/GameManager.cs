@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverReasonText;
     public TextMeshProUGUI gameOverScoreText;
 
+    public Image upgradesMenu;
+    
     public bool gameOverCheck;
     
     public AudioSource dieAudio;
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         gameOverReasonText.gameObject.SetActive(false);
         gameOverScoreText.gameObject.SetActive(false);
+        
     }
     
     void Update()
@@ -49,12 +52,15 @@ public class GameManager : MonoBehaviour
             menu.gameObject.SetActive(true);
             titleText.gameObject.SetActive(true);
             instructionsText.gameObject.SetActive(true);
+            upgradesMenu.gameObject.SetActive(true);
+            Cursor.visible = true;
+            
+            
             currentPlayerFuel = initialPlayerFuel;
             fuelText.text = "Fuel: " + currentPlayerFuel;
             
             currentPlayerHealth = initialPlayerHealth;
             healthText.text = "Health: " + currentPlayerHealth;
-            
             
         }
 
@@ -63,6 +69,8 @@ public class GameManager : MonoBehaviour
            menu.gameObject.SetActive(false);
            titleText.gameObject.SetActive(false);
            instructionsText.gameObject.SetActive(false);
+           upgradesMenu.gameObject.SetActive(false);
+           Cursor.visible = false;
            
            currentPlayerFuel -= Time.deltaTime;
            fuelText.text = "Fuel: " + currentPlayerFuel;

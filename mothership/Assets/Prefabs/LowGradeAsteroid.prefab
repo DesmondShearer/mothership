@@ -4954,7 +4954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
-  configuration: {fileID: 11400000, guid: c25e9c1f22e5614479f4b9cbd8984935, type: 2}
+  targetType: {fileID: 11400000, guid: c25e9c1f22e5614479f4b9cbd8984935, type: 2}
 --- !u!114 &-36663587766851580
 MonoBehaviour:
   m_ObjectHideFlags: 0
