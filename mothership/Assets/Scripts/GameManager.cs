@@ -7,10 +7,14 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    private int initialPlayerHealth = 50;
-    private int currentPlayerHealth;
+    //private int initialPlayerHealth = 50;
+    
+    //private float currentPlayerHealth;
     private float initialPlayerFuel = 100;
     private float currentPlayerFuel;
+    
+    public PlayerStatManager playerStatManager;
+    public PlayerStat playerStatHealth;
     
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI fuelText;
@@ -47,6 +51,9 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+        DisplayFuel();
+        DisplayHealth();
+        
         if (playerController.isDocked)
         {
             menu.gameObject.SetActive(true);
@@ -57,26 +64,27 @@ public class GameManager : MonoBehaviour
             
             
             currentPlayerFuel = initialPlayerFuel;
-            fuelText.text = "Fuel: " + currentPlayerFuel;
-            
-            currentPlayerHealth = initialPlayerHealth;
-            healthText.text = "Health: " + currentPlayerHealth;
+            //fuelText.text = "Fuel: " + currentPlayerFuel.ToString("000");
+
+            //DisplayHealth();
             
         }
 
         if (!playerController.isDocked)
-        {
-           menu.gameObject.SetActive(false);
-           titleText.gameObject.SetActive(false);
-           instructionsText.gameObject.SetActive(false);
-           upgradesMenu.gameObject.SetActive(false);
-           Cursor.visible = false;
+        { 
+            menu.gameObject.SetActive(false);
+            titleText.gameObject.SetActive(false);
+            instructionsText.gameObject.SetActive(false);
+            upgradesMenu.gameObject.SetActive(false);
+            Cursor.visible = false;
            
-           currentPlayerFuel -= Time.deltaTime;
-           fuelText.text = "Fuel: " + currentPlayerFuel;
+            currentPlayerFuel -= Time.deltaTime;
+            //fuelText.text = "Fuel: " + currentPlayerFuel;
+           
+            
         }
         
-        if (currentPlayerHealth == 0)
+        if (playerStatManager.GetStatValue(playerStatHealth) <= 0)
         {
             GameOver();
             gameOverReasonText.text = "You took too much damage!";
@@ -90,12 +98,23 @@ public class GameManager : MonoBehaviour
         
     }
     
-    public void RemoveHealth(int damageToTake)
+    //public void RemoveHealth(int damageToTake)
+    //{
+      //  currentPlayerHealth -= damageToTake;
+       // healthText.text = "Health: " + currentPlayerHealth;
+    //}
+
+    public void DisplayHealth()
     {
-        currentPlayerHealth -= damageToTake;
-        healthText.text = "Health: " + currentPlayerHealth;
+        float health = playerStatManager.GetStatValue(playerStatHealth);
+        healthText.text = "Health: " + health.ToString("000");
     }
 
+    public void DisplayFuel()
+    {
+        fuelText.text = "Fuel: " + currentPlayerFuel.ToString("000");
+    }
+    
     public void GameOver()
     {
         gameOverCheck = true;

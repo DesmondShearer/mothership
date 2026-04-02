@@ -47,4 +47,18 @@ public class PlayerStatManager : MonoBehaviour
             creditManager.UpdateCredits(-playerStatUpgrade.upgradePrice);
         }
     }
+
+    public void TakeDamage(PlayerStat playerStatHealth, float damageToTake)
+    {
+        var stat = playerStats.Find(s => s.playerStat == playerStatHealth);
+
+        if (stat != null)
+        {
+            stat.currentValue -= damageToTake;
+            // Clamp to 0 (no negative health)
+            stat.currentValue = Mathf.Max(stat.currentValue, 0);
+        }
+        
+    }
+    
 }

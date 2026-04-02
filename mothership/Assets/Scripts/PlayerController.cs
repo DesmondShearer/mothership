@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public PlayerStatManager playerStatManager;
     public PlayerStat moveSpeed;
     public PlayerStat boostSpeed;
+    public PlayerStat playerHealth;
     
     private float moveSpeedAngle = 0.5f;
     private float moveSpeedRollAngle = 0.05f;
@@ -103,7 +104,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             damageAudio.Play();
-            gameManager.RemoveHealth(10);
+            playerStatManager.TakeDamage(playerHealth,10);
         }
     }
 }
